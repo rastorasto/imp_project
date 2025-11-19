@@ -35,7 +35,7 @@
 #define WAIT 1250
 
 // Stores RGB values for each pixel in the matrix
-// 0=Red, 1=Blue, 2=Green as seen in the schematic
+// 0=Red, 1=Blue, 2=Green
 uint16_t frame[COLS][ROWS][3];
 
 // Font with letters 5x7 pixels
@@ -147,7 +147,7 @@ void refreshDisplay() {
     // For each row in the current column
     // Populate data array with color values mapped to TLC channels
     for (int r = 0; r < ROWS; r++) {
-      // The wiring is Red, Blue, Green
+      // The wiring is Blue, Red, Green
       data[r * 3 + 0] = frame[scanCol][r][1]; // Channel offset 0 Blue
       data[r * 3 + 1] = frame[scanCol][r][0]; // Channel offset 1 Red
       data[r * 3 + 2] = frame[scanCol][r][2]; // Channel offset 2 Green
@@ -233,9 +233,6 @@ const Color PALETTE[] = {
   {4095,    0,    0}, // Red
   {   0, 4095,    0}, // Green
   {   0,    0, 4095}, // Blue
-  {4095,    0, 4095}, // Purple
-  {   0, 4095, 4095}, // Cyan
-  {4095, 4095,    0}, // Yellow
   {4095, 4095, 4095}  // White
 };
 
@@ -350,7 +347,7 @@ void loop() {
   }
   if (isButtonPressed(BUTTON3)) {
     // Change text color
-    colorIdx = (colorIdx + 1) % 7;
+    colorIdx = (colorIdx + 1) % 4;
   }
   if (isButtonPressed(BUTTON4)) {
     // Change display brightness
